@@ -1,0 +1,50 @@
+<template>
+    <div class="form">
+        <lightning-input label="Nome do Produto" value={productName} onchange={handleNameChange}></lightning-input>
+        <lightning-input label="Código do Produto" value={productCode} onchange={handleCodeChange}></lightning-input>
+        <lightning-input label="Descrição do Produto" value={productDescription} onchange={handleDescriptionChange}></lightning-input>
+        <lightning-input type="number" label="Preço do Produto" value={productPrice} onchange={handlePriceChange}></lightning-input>
+        <div class="button-group">
+            <template if:true={editMode}>
+                <lightning-button label="Atualizar" onclick={updateProduct} variant="brand"></lightning-button>
+            </template>
+            <template if:false={editMode}>
+                <lightning-button label="Adicionar" onclick={saveProduct} variant="brand"></lightning-button>
+            </template>
+            <lightning-button label="Limpar" onclick={clearFields}></lightning-button>
+        </div>
+    </div>
+
+    <div class="search">
+        <lightning-input label="Buscar Produto" value={searchKey} onchange={handleSearchKeyChange}></lightning-input>
+        <lightning-button label="Buscar" onclick={searchProducts} variant="brand"></lightning-button>
+    </div>
+
+    <div class="table">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="slds-size_1-of-4">Nome</th>
+                    <th class="slds-size_1-of-4">Código</th>
+                    <th class="slds-size_1-of-4">Descrição</th>
+                    <th class="slds-size_1-of-4">Preço</th>
+                    <th class="slds-size_1-of-4">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={filteredProducts} for:item="product">
+                    <tr key={product.Id}>
+                        <td>{product.Nome_do_Produto__c}</td>
+                        <td>{product.Codigo_do_Produto__c}</td>
+                        <td>{product.Descricao_do_Produto__c}</td>
+                        <td>{product.Preco_do_Produto__c}</td>
+                        <td>
+                            <lightning-button label="Editar" onclick={editProduct} variant="brand" value={product}></lightning-button>
+                            <lightning-button label="Excluir" onclick={deleteProduct} variant="destructive" value={product.Id}></lightning-button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</template>
