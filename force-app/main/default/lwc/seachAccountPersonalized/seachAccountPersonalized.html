@@ -1,0 +1,141 @@
+<template>
+    <lightning-card title="Search Account" class="lg-card">
+        <lightning-layout>
+            <lightning-layout-item>
+                <div class="form1">
+                    <lightning-input 
+                        label="AccountName" 
+                        value={accountName} 
+                        onchange={handleChange}>
+                    </lightning-input>
+                    
+                    <lightning-combobox label="AccountType" 
+                        value={accountType}
+                        onchange={handleChange}
+                        options={accountTypesDefault}
+                        placeholder="Insira tipo de campanha aqui">
+                    </lightning-combobox>
+                </div>
+                <div>
+                    <lightning-button 
+                        label="Salvar"
+                        onclick={saveValues}>
+                    </lightning-button>
+                    <lightning-button 
+                        label="Limpar"
+                        onclick={cleanFields}>
+                    </lightning-button>
+                </div>
+            </lightning-layout-item>
+
+            <lightning-layout-item>
+                <div class="form2">
+                    <lightning-input 
+                        label="BuscaAccount" 
+                        value={search} 
+                        onchange={handleChange}>
+                    </lightning-input>
+                </div>
+                <div>
+                    <lightning-button 
+                        label="Buscar"
+                        onclick={searchAccountByName}>
+                    </lightning-button>
+                    <lightning-button 
+                        label="Limpar"
+                        onclick={cleanFields}>
+                    </lightning-button>
+                </div>
+                <!--<div>
+                    <template if:true={isModalOpen}>
+                        <div class="backdrop" onclick={closeModal}></div>
+                        <div class="modal">
+                            <header class="modal-header">
+                                <h2>Meu Modal</h2>
+                                <button class="close-btn" onclick={closeModal}>
+                                    <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                                </button>
+                            </header>
+                            <div class="modal-content">
+                                <table>
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={data} for:item="item">
+                                            <tr key={item.id} data-id={item.id}>
+                                                <td>{item.Name}</td>
+                                                <td>{item.Type}</td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </template>
+                </div>-->
+            </lightning-layout-item>
+            <lightning-layout-item if:true={isModalOpen}>
+                <section role="dialog" 
+                    tabindex="-1" 
+                    aria-modal="true" 
+                    aria-labelledby="modal-heading-01" 
+                    class="slds-modal slds-fade-in-open">
+                    
+                    <div class="slds-modal__container">
+
+                    <!--<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>-->
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Resultados da Busca Account Name</h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <template if:true={isModalOpen}>
+                            <div class="backdrop" onclick={closeModal}></div>
+                            
+                            <div class="modal">
+                                <header class="modal-header">
+                                    <h2>Meu Modal</h2>
+                                    <button class="close-btn" onclick={closeModal}>
+                                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                                    </button>
+                                </header>
+                                <div class="modal-content">
+                                    <!-- Conteúdo do seu modal -->
+                                    <!-- Aqui você pode adicionar campos de formulário, texto, etc. -->
+                                    <table>
+                                        <thead>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                        </thead>
+                                        <tbody>
+                                            <template for:each={data} for:item="item">
+                                                <tr key={item.id} data-id={item.id}>
+                                                    <td>{item.Name}</td>
+                                                    <td>{item.Type}</td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" 
+                            aria-label="Cancel and close"
+                            onclick={closeModal}>Close</button>
+                        <!-- <button class="slds-button slds-button_brand">Save</button> -->
+                        </div>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>
